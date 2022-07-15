@@ -3,7 +3,7 @@ package JavaProgram;
  * 54321
  * 5432
  * 543
- * 54
+ * 53
  * 5
  */
 public class Pattern5to1 {
