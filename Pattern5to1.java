@@ -1,7 +1,7 @@
 package JavaProgram;
 /*print the pattern
  * 54321
- * 5432
+ * 5433
  * 543
  * 54
  * 5
