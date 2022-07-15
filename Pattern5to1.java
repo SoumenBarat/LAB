@@ -4,7 +4,7 @@ package JavaProgram;
  * 5432
  * 543
  * 54
- * 
+ * 5
  */
 public class Pattern5to1 {
 	public static void main(String[] args) {
