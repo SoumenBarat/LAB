@@ -1,4 +1,4 @@
-/*create abstract class vaccine.create 2 concrete method firstDose() and 2ndDose().
+/*create abstract class vaccine.create 2 concrete method firstDose() and secondDose().
 Scenario 1:user can take first dose if user is Indian and age is 18.after vaccination user has to pay 250rs. 
 Scenario 2: user can take 2nd dose if already the first dose has completed.
 Scenario 3: create abstract method boosterDose() in abstract class Vaccine.create one implementation class vaccinationSuccessful where implement boosterDose() method.
