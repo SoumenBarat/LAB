@@ -1,0 +1,79 @@
+
+mysql> insert into student_info values('19273030468','Chayan','CSE',9134735380,'1999-02-18','2022-04-01','Durgapur','chayanjana.19@nshm.edu.in');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_info values('1927303898','Soumen','CSE',6956985685,'1999-01-15','2022-05-22','Bankura','soumen@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_info values('1927303568','Sumit','CSE',6954695255,'1998-02-15','2022-10-25','Murshidabad','sumit@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student_info values('1927303579','Shubhajit','CSE',6695546225,'1997-05-19','2022-06-14','Purulia','shubhajit@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student_info;
++-------------+-----------+--------+-------------+------------+------------+-------------+---------------------------+
+| reg_no      | name      | branch | contact     | dob        | doj        | address     | mail_id                   |
++-------------+-----------+--------+-------------+------------+------------+-------------+---------------------------+
+| 19273030468 | Chayan    | CSE    |  9134735380 | 1999-02-18 | 2022-04-01 | Durgapur    | chayanjana.19@nshm.edu.in |
+| 1927303568  | Sumit     | CSE    |  6954695255 | 1998-02-15 | 2022-10-25 | Murshidabad | sumit@gmail.com           |
+| 1927303579  | Shubhajit | CSE    |  6695546225 | 1997-05-19 | 2022-06-14 | Purulia     | shubhajit@gmail.com       |
+| 1927303898  | Soumen    | CSE    |  6956985685 | 1999-01-15 | 2022-05-22 | Bankura     | soumen@gmail.com          |
++-------------+-----------+--------+-------------+------------+------------+-------------+---------------------------+
+4 rows in set (0.00 sec)
+
+mysql> create table subject(sub_code varchar(5) primary key,sub1 int,sub2 int,sub3 int,weight int,sem varchar(5),reg_no varchar(11),foreign key(reg_no) references student_info(reg_no),credit int);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql>  desc subject;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| sub_code | varchar(5)  | NO   | PRI | NULL    |       |
+| sub1     | int         | YES  |     | NULL    |       |
+| sub2     | int         | YES  |     | NULL    |       |
+| sub3     | int         | YES  |     | NULL    |       |
+| weight   | int         | YES  |     | NULL    |       |
+| sem      | varchar(5)  | YES  |     | NULL    |       |
+| reg_no   | varchar(11) | YES  | MUL | NULL    |       |
+| credit   | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> insert into subject values('S001',85,89,79,10,'1st','19273030468',8),('S002',95,79,90,10,'1st','1927303568',8),('S003',90,97,92,10,'1st','1927303579',9),('S004',75,91,82,10,'1st','1927303898',8);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql>  select * from subject;
++----------+------+------+------+--------+------+-------------+--------+
+| sub_code | sub1 | sub2 | sub3 | weight | sem  | reg_no      | credit |
++----------+------+------+------+--------+------+-------------+--------+
+| S001     |   85 |   89 |   79 |     10 | 1st  | 19273030468 |      8 |
+| S002     |   95 |   79 |   90 |     10 | 1st  | 1927303568  |      8 |
+| S003     |   90 |   97 |   92 |     10 | 1st  | 1927303579  |      9 |
+| S004     |   75 |   91 |   82 |     10 | 1st  | 1927303898  |      8 |
++----------+------+------+------+--------+------+-------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select (sub1+sub2+sub3) as 'total',(weight*credit) as 'GPA' from subject;
++-------+------+
+| total | GPA  |
++-------+------+
+|   253 |   80 |
+|   264 |   80 |
+|   279 |   90 |
+|   248 |   80 |
++-------+------+
+4 rows in set (0.01 sec)
+
+mysql> select i.name,i.reg_no,s.sub1,s.sub2,s.sub3,s.weight,s.credit,(sub1+sub2+sub3)as'total',(weight*credit)as'GPA' from student_info i inner join subject s on i.reg_no=s.reg_no;
++-----------+-------------+------+------+------+--------+--------+-------+------+
+| name      | reg_no      | sub1 | sub2 | sub3 | weight | credit | total | GPA  |
++-----------+-------------+------+------+------+--------+--------+-------+------+
+| Chayan    | 19273030468 |   85 |   89 |   79 |     10 |      8 |   253 |   80 |
+| Sumit     | 1927303568  |   95 |   79 |   90 |     10 |      8 |   264 |   80 |
+| Shubhajit | 1927303579  |   90 |   97 |   92 |     10 |      9 |   279 |   90 |
+| Soumen    | 1927303898  |   75 |   91 |   82 |     10 |      8 |   248 |   80 |
++-----------+-------------+------+------+------+--------+--------+-------+------+
+4 rows in set (0.01 sec)
+
